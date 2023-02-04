@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import Frase from './components/Frase'
 
@@ -17,6 +17,12 @@ const Boton = styled.button`
   padding: 1rem 3rem;
   font-size: 2rem;
   border: 2px solid black;
+  transition: background-size .8s ease;
+
+  :hover {
+    cursor: pointer;
+    backgroud-size: 400px;
+  }
 `
 function App () {
   const [frase, guardarFrase] = useState({})
@@ -28,12 +34,14 @@ function App () {
       })
   }
 
+  useEffect(() => {
+    consultarApi()
+  }, [])
   return (
     <main className='App'>
       <Contenedor>
         <Frase
-          frase={frase.quote}
-          autor={frase.author}
+          frase={frase}
         />
         <Boton
           onClick={consultarApi}

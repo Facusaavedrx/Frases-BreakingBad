@@ -30,17 +30,17 @@ const ContenedorFrase = styled.section`
     font-size: 1.4rem;
     font-weight: bold;
     text-align: right;
-    color #666;
+    color: #666;
     margin-top: 2rem;
   }
 `
 
-function Frase ({ frase, autor }) {
+function Frase ({ frase }) {
   if (Object.keys(frase).length === 0) return null
   return (
     <ContenedorFrase>
-      <h1> {frase} </h1>
-      <p>- {autor} -</p>
+      <h1> {frase.quote} </h1>
+      <p>- {frase.author} -</p>
     </ContenedorFrase>
   )
 }
