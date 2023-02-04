@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import styled from '@emotion/styled'
+import Frase from './components/Frase'
 
 const Contenedor = styled.article`
   display: flex;
@@ -17,11 +19,26 @@ const Boton = styled.button`
   border: 2px solid black;
 `
 function App () {
+  const [frase, guardarFrase] = useState({})
+  const consultarApi = () => {
+    fetch('https://api.breakingbadquotes.xyz/v1/quotes')
+      .then((response) => response.json())
+      .then((frase) => {
+        guardarFrase(frase[0])
+      })
+  }
+
   return (
     <main className='App'>
       <Contenedor>
-        <Boton>
-          Obtener frase
+        <Frase
+          frase={frase.quote}
+          autor={frase.author}
+        />
+        <Boton
+          onClick={consultarApi}
+        >
+          Get phrase
         </Boton>
       </Contenedor>
     </main>
